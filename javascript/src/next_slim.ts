@@ -117,6 +117,7 @@ export {
   decodeSyncState,
   generateSyncMessage,
   receiveSyncMessage,
+  hasOurChanges,
   initSyncState,
   encodeChange,
   decodeChange,
@@ -136,6 +137,9 @@ export {
   wasmInitialized,
   isWasmInitialized,
   hasHeads,
+  topoHistoryTraversal,
+  inspectChange,
+  stats,
 } from "./stable.js"
 
 export type InitOptions<T> = {
@@ -532,7 +536,7 @@ export function getCursor<T>(
   const state = _state(doc, false)
 
   try {
-    return state.handle.getCursor(objPath, index)
+    return state.handle.getCursor(objPath, index, state.heads)
   } catch (e) {
     throw new RangeError(`Cannot getCursor: ${e}`)
   }
@@ -556,7 +560,7 @@ export function getCursorPosition<T>(
   const state = _state(doc, false)
 
   try {
-    return state.handle.getCursorPosition(objPath, cursor)
+    return state.handle.getCursorPosition(objPath, cursor, state.heads)
   } catch (e) {
     throw new RangeError(`Cannot getCursorPosition: ${e}`)
   }
