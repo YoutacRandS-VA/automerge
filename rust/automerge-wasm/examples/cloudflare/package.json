@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "wrangler": "^2.12.2"
+    "wrangler": "^4.68.1"
   },
   "dependencies": {
     "@automerge/automerge-wasm": "^0.1.26"
